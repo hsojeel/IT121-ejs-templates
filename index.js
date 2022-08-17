@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+var data = require('./data/test.json');
 
 app.set('view engine','ejs');
 
@@ -19,6 +20,15 @@ app.get('/about-us', (req, res) => {
   res.render('pages/about-us',{title:title});
 });
 
+app.get('/users', function(req, res) {
+	var title = 'Our Users';
+  var heading = "My Website";
+	res.render('users/index', {
+    	title: title,
+      heading: heading,
+    	users: data
+	});
+});
 
 app.get('/nuggets', (req, res) => {
   var title = 'Denver Nuggets';
@@ -37,4 +47,5 @@ app.get('/hornets', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
+  console.log(data);
 });
